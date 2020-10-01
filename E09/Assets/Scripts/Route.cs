@@ -10,6 +10,18 @@ public class Route : MonoBehaviour
     {
         FillNodes();   
     }
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.blue;
+        FillNodes();
+
+        for(int i = 0; i < childNodeList.Count; i++){
+            Vector3 currrentPos = childNodeList[i].position;
+            if(i>0){
+                Vector3 prev = childNodeList[i-1].position;
+                Gizmos.DrawLine(prev, currrentPos);
+            }
+        }
+    }
     void FillNodes(){
         childNodeList.Clear(); 
         childNodes = GetComponentsInChildren<Transform>();
