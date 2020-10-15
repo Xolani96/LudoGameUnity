@@ -32,4 +32,9 @@ public class Route : MonoBehaviour
             }
         }
     }
+
+    public int RequestPosition(Transform nodeTransform)
+    {
+        return childNodeList.IndexOf(nodeTransform);
+    }
 }
