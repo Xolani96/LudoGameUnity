@@ -23,7 +23,7 @@ public class Stone : MonoBehaviour
     public bool isOut;
     bool isMoving;
 
-    int steps; // rolled dice amount
+    int steps; // rolled dice amount 
     int doneSteps;
 
     bool HasTurn; //It is for human input 
