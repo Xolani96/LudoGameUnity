@@ -95,4 +95,77 @@ public class Stone : MonoBehaviour
     {
         return goalPos != (transform.position = Vector3.MoveTowards(transform.position, goalPos, speed * Time.deltaTime));
     }
+
+    public bool ReturnISOut()
+    {
+        return isOut;
+    }
+
+    public void LeaveBase()
+    {
+        steps = 1;
+        isOut = true;
+        routePosition = 0;
+
+        //start the coroutine
+        StartCoroutine(MoveOut());
+    }
+
+    IEnumerator MoveOut()
+    {
+        if (isMoving)
+        {
+            yield break;
+        }
+
+        isMoving = true;
+
+        while (steps > 0)
+        {
+            //routePosition++; // update current route position 
+
+            Vector3 nextPos = fullRoute[routePosition].gameObject.transform.position;
+            while (MoveToNextNode(nextPos, 8f)) { yield return null; }
+            yield return new WaitForSeconds(0.1f);
+            steps--;
+            doneSteps++;
+        }
+
+        //update node
+        goalNode = fullRoute[routePosition];
+
+        //check for kicking other stones
+        if (goalNode.isTaken)
+        {
+            //return stone to base node
+
+        }
+
+        goalNode.stone = this;
+        goalNode.isTaken = true;
+
+        currentNode = goalNode;
+        goalNode = null;
+
+        //report back to game manager
+        GameManager.instance.state = GameManager.States.ROLL_DICE;
+
+        isMoving = false;
+    }
+
+    public bool CheckPossible(int diceNumber)
+    {
+        int temp = routePosition + diceNumber;
+        if(temp >= fullRoute.Count)
+        {
+            return false;
+        }
+
+        return !fullRoute[temp].isTaken;
+    }
+
+    public bool CheckPossibleKick(int stoneId, int dicenumber)
+    {
+
+    }
 }

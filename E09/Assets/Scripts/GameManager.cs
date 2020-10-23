@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
      * who are the active players
      * etc
      */
-    public static GameManager instance; 
+    public static GameManager instance;
 
     [System.Serializable]
     public class Player
@@ -52,12 +52,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+        instance = this;
     }
 
     public void Update()
     {
-        if(playerList[activePlayer].playerType == Player.PlayerType.CPU)
+        if (playerList[activePlayer].playerType == Player.PlayerType.CPU)
         {
             switch (state)
             {
@@ -79,14 +79,16 @@ public class GameManager : MonoBehaviour
 
     void RollDice()
     {
-        int rolledDice = Random.Range(1, 7);
+        //int rolledDice = Random.Range(1, 7);
+        int rolledDice = 6;
 
-        if(rolledDice == 6)
+        if (rolledDice == 6)
         {
             //check the start node
+            ChecksStartNode(rolledDice);
 
         }
-        if(rolledDice < 6)
+        if (rolledDice < 6)
         {
             //check for kick
         }
@@ -97,5 +99,59 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2); // the next cpu will have to wait for 2 seconds before it rolls the dice. 
         RollDice();
+    }
+
+    void ChecksStartNode(int rollednumber)
+    {
+        //is anyone on the start node
+        bool startNodefull = false;
+        for (int i = 0; i < playerList[activePlayer].myStones.Length; i++)
+        {
+            if(playerList[activePlayer].myStones[i].currentNode == playerList[activePlayer].myStones[i].startNode)
+            {
+                startNodefull = true;
+                break; // We are done here we found a match
+            }
+        }
+
+        if (startNodefull)
+        {
+            //Move the stone
+            Debug.Log("The start node is full");
+        }
+        else //Start Node Is empty
+        {
+            //if at least one stone is still in the base
+            for (int i = 0; i < playerList[activePlayer].myStones.Length; i++)
+            {
+                if (!playerList[activePlayer].myStones[i].ReturnISOut())
+                {
+                    //move the stone out of the base
+                    playerList[activePlayer].myStones[i].LeaveBase();
+                    state = States.WAITING;
+                    return;
+                }
+            }
+
+            //Move the stone
+
+        }
+    }
+
+    void MoveAStone(int Dicenumber)
+    {
+        List<Stone> movableStones = new List<Stone>();
+        List<Stone> moveKickStones = new List<Stone>();
+
+        //fill the list
+        for (int i = 0; i < playerList[activePlayer].myStones.Length; i++)
+        {
+            if (playerList[activePlayer].myStones[i].ReturnISOut())
+            {
+                //check for possible kick
+
+                //check for possible move
+            }
+        }
     }
 }
