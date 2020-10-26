@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 2
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1947492604}
   fullRoute: []
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 4
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 717536929}
   fullRoute: []
@@ -997,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 1
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1810624007}
   fullRoute: []
@@ -4076,6 +4079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 2
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1947492604}
   fullRoute: []
@@ -4183,6 +4187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 1
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1810624007}
   fullRoute: []
@@ -5241,6 +5246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 3
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1313855503}
   fullRoute: []
@@ -6200,6 +6206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 3
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1313855503}
   fullRoute: []
@@ -6313,6 +6320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 4
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 717536929}
   fullRoute: []
@@ -6859,6 +6867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 1
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1810624007}
   fullRoute: []
@@ -7608,6 +7617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 1
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1810624007}
   fullRoute: []
@@ -8029,6 +8039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 2
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1947492604}
   fullRoute: []
@@ -8386,6 +8397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 3
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1313855503}
   fullRoute: []
@@ -8545,6 +8557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 4
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 717536929}
   fullRoute: []
@@ -8866,6 +8879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 3
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1313855503}
   fullRoute: []
@@ -9052,6 +9066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 2
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 1947492604}
   fullRoute: []
@@ -10156,6 +10171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb07afca5389546a878879232178d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneId: 4
   commonRoute: {fileID: 500229678}
   finalRoute: {fileID: 717536929}
   fullRoute: []
@@ -11035,14 +11051,29 @@ MonoBehaviour:
     - {fileID: 197833458}
     - {fileID: 1071872643}
     - {fileID: 750285848}
+    hasTurn: 0
+    playerType: 1
+    hasWon: 0
+  - playerName: Yellow
+    myStones:
     - {fileID: 1449780792}
     - {fileID: 1247189289}
     - {fileID: 5085508}
     - {fileID: 734266269}
+    hasTurn: 0
+    playerType: 1
+    hasWon: 0
+  - playerName: Blue
+    myStones:
     - {fileID: 1025636255}
     - {fileID: 1302964406}
     - {fileID: 1402883163}
     - {fileID: 834216322}
+    hasTurn: 0
+    playerType: 1
+    hasWon: 0
+  - playerName: Green
+    myStones:
     - {fileID: 1660560211}
     - {fileID: 1324157048}
     - {fileID: 59099602}

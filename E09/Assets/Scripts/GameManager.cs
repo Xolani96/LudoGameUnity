@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public States state;
 
     public int activePlayer;
-    bool swtchingPlayer;
+    bool switchingPlayer;
 
     //human input
     //Game object for our button
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case States.SWITCH_PLAYER:
+                    StartCoroutine(SwitchPlayer());
+                    state = States.WAITING;
                     break;
             }
         }
@@ -79,8 +81,8 @@ public class GameManager : MonoBehaviour
 
     void RollDice()
     {
-        //int rolledDice = Random.Range(1, 7);
-        int rolledDice = 6;
+        int rolledDice = Random.Range(1, 7);
+        //int rolledDice = 6;
 
         if (rolledDice == 6)
         {
@@ -90,7 +92,8 @@ public class GameManager : MonoBehaviour
         }
         if (rolledDice < 6)
         {
-            //check for kick
+            //check for move
+            MoveAStone(rolledDice);
         }
         Debug.Log("Dice number rolled " + rolledDice);
     }
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
         if (startNodefull)
         {
             //Move the stone
+            MoveAStone(rollednumber);
             Debug.Log("The start node is full");
         }
         else //Start Node Is empty
@@ -134,7 +138,7 @@ public class GameManager : MonoBehaviour
             }
 
             //Move the stone
-
+            MoveAStone(rollednumber);
         }
     }
 
@@ -149,9 +153,83 @@ public class GameManager : MonoBehaviour
             if (playerList[activePlayer].myStones[i].ReturnISOut())
             {
                 //check for possible kick
-
+                if(playerList[activePlayer].myStones[i].CheckPossibleKick(playerList[activePlayer].myStones[i].stoneId, Dicenumber))
+                {
+                    moveKickStones.Add(playerList[activePlayer].myStones[i]);
+                    continue;
+                }
                 //check for possible move
+                if (playerList[activePlayer].myStones[i].CheckPossibleMove(Dicenumber))
+                {
+                    movableStones.Add(playerList[activePlayer].myStones[i]);
+                    continue;
+                }
             }
         }
+
+        //perform Kick if possible
+        if(moveKickStones.Count > 0)
+        {
+            int num = Random.Range(0, moveKickStones.Count);
+            moveKickStones[num].StartTheMove(Dicenumber);
+            state = States.WAITING;
+            return;
+        }
+        //perfome move if possible
+        if (movableStones.Count > 0)
+        {
+            int num = Random.Range(0, movableStones.Count);
+            movableStones[num].StartTheMove(Dicenumber);
+            state = States.WAITING;
+            return;
+        }
+        //if none is possible then switch player
+        state = States.SWITCH_PLAYER;
+        Debug.Log("Should switch players");
+    }
+
+    IEnumerator SwitchPlayer()
+    {
+        if (switchingPlayer)
+        {
+            yield break;
+        }
+
+        switchingPlayer = true;
+
+        yield return new WaitForSeconds(2);
+        //set next player
+        SetNextActivePlayer();
+
+        switchingPlayer = false;
+    }
+
+    void SetNextActivePlayer()
+    {
+        activePlayer++;
+        activePlayer %= playerList.Count;
+
+        int available = 0;
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (!playerList[i].hasWon)
+            {
+                available++;
+            }
+        }
+        if(playerList[activePlayer].hasWon && available > 1)
+        {
+            SetNextActivePlayer();
+            return;
+        }
+        else if (available < 2)
+        {
+            //Game over screen
+            state = States.WAITING;
+            return;
+        }
+
+        state = States.ROLL_DICE;
+
     }
 }

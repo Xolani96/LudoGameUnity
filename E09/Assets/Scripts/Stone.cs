@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Stone : MonoBehaviour
 {
+    public int stoneId;
+
     [Header("ROUTES")]
     public Route commonRoute; //Outer Route
     public Route finalRoute; //final route
@@ -88,6 +90,27 @@ public class Stone : MonoBehaviour
             doneSteps++;
         }
 
+        goalNode = fullRoute[routePosition];
+        //check possible kicks
+        if (goalNode.isTaken)
+        {
+            //kick the other stone
+        }
+
+        currentNode.stone = null;
+        currentNode.isTaken = false;
+
+        goalNode.stone = this;
+        goalNode.isTaken = true;
+
+        currentNode = goalNode;
+        goalNode = null;
+
+        //report to game manager
+        //switch player
+        GameManager.instance.state = GameManager.States.SWITCH_PLAYER;
+
+
         isMoving = false;
     }
 
@@ -153,19 +176,40 @@ public class Stone : MonoBehaviour
         isMoving = false;
     }
 
-    public bool CheckPossible(int diceNumber)
+    public bool CheckPossibleMove(int diceNumber)
     {
         int temp = routePosition + diceNumber;
         if(temp >= fullRoute.Count)
         {
+            //check whether we are going over the full route
             return false;
         }
 
         return !fullRoute[temp].isTaken;
     }
 
-    public bool CheckPossibleKick(int stoneId, int dicenumber)
+    public bool CheckPossibleKick(int stoneID, int dicenumber)
     {
+        int temp = routePosition + dicenumber;
+        if (temp >= fullRoute.Count)
+        {
+            //check whether we are going over the full route
+            return false;
+        }
+        if (fullRoute[temp].isTaken)
+        {
+            if (stoneID == fullRoute[temp].stone.stoneId)
+            {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 
+    public void StartTheMove(int dicenumber)
+    {
+        steps = dicenumber;
+        StartCoroutine(Move());
     }
 }
